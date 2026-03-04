@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+        - name: demo-app
+          image: localhost:8083/demo-app:latest  # placeholder, will be replaced
+          ports:
+            - containerPort: 7272
+      imagePullSecrets:
+        - name: nexus-cred
+
+
+
+
