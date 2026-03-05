@@ -12,13 +12,11 @@ spec:
       labels:
         app: demo-app
     spec:
+      imagePullSecrets:
+        - name: nexus-cred
       containers:
         - name: demo-app
-          image: demo-app:latest 
-          imagePullPolicy: Always # placeholder, will be replaced
+          image: localhost:8083/demo-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
-
-
-
-
