@@ -7,6 +7,8 @@ spec:
     app: demo-app
   ports:
     - protocol: TCP
-      port: 80      # The port the Service itself will listen on (internal to cluster)
-      targetPort: 3000 # <--- CHANGE THIS FROM 7272 to 3000
+      port: 80
+      targetPort: 3000 # Your app listens on 3000
+      nodePort: 30080  # <--- Explicitly define the NodePort here
+                       # Must be in the 30000-32767 range and unique
   type: NodePort
