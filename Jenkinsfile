@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     def imageTag = "localhost:8083/demo-app:${BUILD_NUMBER}"
-                    sh "docker tag demo-app:${BUILD_NUMBER} localhost:8083/demo-app:latest" 
+                    sh "docker tag demo-app:${BUILD_NUMBER} demo-app:latest"
                     sh "kubectl apply -f deployment.yaml"
                     sh "kubectl apply -f service.yaml"
                     sh "kubectl rollout status deployment/demo-app"

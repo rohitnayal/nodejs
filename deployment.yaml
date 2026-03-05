@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: localhost:8083/demo-app:latest  # placeholder, will be replaced
+          image: demo-app:latest  # placeholder, will be replaced
           ports:
-            - containerPort: 7272
+            - containerPort: 3000
       imagePullSecrets:
         - name: nexus-cred
 
