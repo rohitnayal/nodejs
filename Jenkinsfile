@@ -8,13 +8,13 @@ pipeline {
             }
         }
 
-     stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {  
-                    sh "${tool 'SonarQube Scanner'}/bin/sonar-scanner -Dsonar.projectKey=demo-app -Dsonar.sources=."
+    stage('SonarQube Analysis') {
+             steps {
+               withSonarQubeEnv('SonarQube') {  
+                   sh "${tool 'SonarQube Scanner'}/bin/sonar-scanner -Dsonar.projectKey=demo-app -Dsonar.sources=."
                 }
-            }
-        }
+             }
+         }
     
 
         stage('Build Docker Image') {
@@ -29,6 +29,8 @@ pipeline {
                     docker.withRegistry('http://localhost:8083', 'nexus-credentials') {
                         sh "docker tag demo-app:${BUILD_NUMBER} localhost:8083/demo-app:${BUILD_NUMBER}"
                         sh "docker push localhost:8083/demo-app:${BUILD_NUMBER}"
+                        sh "docker tag demo-app:${BUILD_NUMBER} localhost:8083/demo-app:latest"
+                        sh "docker push localhost:8083/demo-app:latest"
                     }
                 }
             }
@@ -41,6 +43,7 @@ pipeline {
                     sh "docker tag demo-app:${BUILD_NUMBER} demo-app:latest"
                     sh "kubectl apply -f deployment.yaml"
                     sh "kubectl apply -f service.yaml"
+                    sh "kubectl rollout restart deployment/demo-app"
                     sh "kubectl rollout status deployment/demo-app"
                 }
             }
