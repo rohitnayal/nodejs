@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: demo-app:latest  # placeholder, will be replaced
+          image: demo-app:latest 
+          imagePullPolicy: Always # placeholder, will be replaced
           ports:
             - containerPort: 3000
 
