@@ -17,8 +17,6 @@ spec:
           image: demo-app:latest  # placeholder, will be replaced
           ports:
             - containerPort: 3000
-      imagePullSecrets:
-        - name: nexus-cred
 
 
 
